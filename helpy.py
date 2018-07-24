@@ -1,4 +1,6 @@
+print ("*"*12+"start "+"*"*12)
 print ("*"*30)
+
 
 for i in range (5,10) : 
     print ('Hello Jenkins'.center(10+2*i))
