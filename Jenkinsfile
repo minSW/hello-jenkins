@@ -2,23 +2,22 @@ pipeline {
 	agent { node 'slave-2' }
 
 	options {
-		timeout(time: 30, unit: 'MINUTES' )
+		timeout(time: 40, unit: 'MINUTES' )
 		timestamps()
 	}
 
 	stages {
 		stage('Init') {
 			steps {
-				sh """
-				git clone https://github.com/sktelecom-oslab/taco-scripts.git
-				cd taco-scripts
-				"""
+				sh "git clone https://github.com/sktelecom-oslab/taco-scripts.git"
 			}
 		}
 
 		stage('Run the script') {
 			steps {
-				sh "./010-init-env.sh"
+				sh """cd taco-scripts
+				./010-init-env.sh
+				"""
 			}
 		}
 	}
