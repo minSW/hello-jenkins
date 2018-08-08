@@ -9,7 +9,9 @@ pipeline {
 	stages {
 		stage('Init') {
 			steps {
-				sh "git clone https://github.com/sktelecom-oslab/taco-scripts.git"
+				sh """sudo -i
+				git clone https://github.com/sktelecom-oslab/taco-scripts.git
+				"""
 			}
 		}
 
