@@ -2,7 +2,7 @@ pipeline {
 	agent { node 'slave-2' }
 
 	options {
-		timeout(time: 40, unit: 'MINUTES' )
+		timeout(time: 70, unit: 'MINUTES' )
 		timestamps()
 	}
 
@@ -15,17 +15,21 @@ pipeline {
 			}
 		}
 
-		stage('Run the script') {
+		stage('Run the script 010-30') {
 			steps {
-				sh """cd taco-scripts
-				./010-init-env.sh
-				"""
+			    dir('taco-scripts') {
+			    	sh "sudo ./010-init-env.sh"
+			    	sh "sudo ./020-install-k8s.sh"
+			    	sh "sudo ./030-install-armada.sh"
+			    }
 			}
 		}
 	}
 	post {
 		//always {
-		//	..
+		//	dir('taco-scripts') {
+		//		sh "sudo ./099-cleanup-all.sh"
+		//	}
 		//}
 		success {
 			//notifyCompleted(true)
@@ -36,6 +40,11 @@ pipeline {
 		}
 		failure {
 			//notifyCompleted(false)
+			dir('taco-scripts') {
+				sh """rm -rf taco-scripts/
+				sudo ./099-cleanup-all.sh
+				"""
+			}
 			slackSend (
 				color: '#FA5882',
 				message: "FAILED: job '${env.JOB_NAME} [${env.BUILD_NUMBER}]] (${env.BUILD_URL})"
