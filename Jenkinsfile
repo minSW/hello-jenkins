@@ -7,6 +7,7 @@ pipeline {
 	}
 
 	stages {
+	/*
 		stage('Init') {
 			steps {
 				sh """sudo -i
@@ -26,6 +27,36 @@ pipeline {
 			    }
 			}
 		}
+	*/
+		stage('Run the script 040-41') {
+			steps {
+			    dir('taco-scripts') {
+			    	sh "sudo ./040-deploy-openstack.sh"
+			    	sh "sudo ./041-install-armada.sh"
+			    }
+			}
+		}
+
+		stage('Run the script 050 _ create os resources') {
+			steps {
+			    dir('taco-scripts') {
+			    	sh "sudo ./050-deploy-openstack.sh"
+			    }
+			}
+		}
+
+		stage('Test os') {
+			steps {
+				dir ('taco-scripts') {
+					sh """ . adminrc
+					kubectl get po --all-namespaces > pod_status.txt
+					openstack service list > os_list.txt
+					openstack network list >> os_list.txt
+					openstack server list >> os_list.txt
+					"""
+				}
+			}
+		}
 	}
 	post {
 		success {
@@ -37,11 +68,13 @@ pipeline {
 		}
 		failure {
 			//notifyCompleted(false)
-			//dir('taco-scripts') {
-			//	sh """rm -rf taco-scripts/
-			//	sudo ./099-cleanup-all.sh
-			//	"""
-			//}
+			/*
+			dir('taco-scripts') {
+				sh """rm -rf taco-scripts/
+				sudo ./099-cleanup-all.sh
+				"""
+			}
+			*/
 			slackSend (
 				color: '#FA5882',
 				message: "FAILED: job '${env.JOB_NAME} [${env.BUILD_NUMBER}]] (${env.BUILD_URL})"
