@@ -7,6 +7,7 @@ pipeline {
 	}
 
 	stages {
+	/*
 		stage('Init') {
 			steps {
 				sh """sudo -i
@@ -26,6 +27,7 @@ pipeline {
 			    }
 			}
 		}
+		*/
 
 		stage('Run the script 040-41') {
 			steps {
