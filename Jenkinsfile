@@ -2,7 +2,7 @@ pipeline {
 	agent { node 'slave-2' }
 
 	options {
-		timeout(time: 100, unit: 'MINUTES' )
+		timeout(time: 1000, unit: 'MINUTES' )
 		timestamps()
 	}
 
