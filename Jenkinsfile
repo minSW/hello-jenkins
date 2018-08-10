@@ -7,7 +7,7 @@ pipeline {
 	}
 
 	stages {
-
+/*
 		stage('Init') {
 			steps {
 				sh """sudo -i
@@ -28,7 +28,7 @@ pipeline {
 			}
 		}
 		
-/*
+*/
 		stage('Run the script 040-41') {
 			steps {
 			    dir('taco-scripts') {
@@ -37,6 +37,7 @@ pipeline {
 			    }
 			}
 		}
+		/*
 
 		stage('Run the script 050 _ create os resources') {
 			steps {
@@ -58,7 +59,8 @@ pipeline {
 				}
 			}
 		}
-*/
+		*/
+
 	}
 
 	post {
