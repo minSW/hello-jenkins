@@ -49,13 +49,12 @@ pipeline {
 */
 		stage('Test os') {
 			steps {
-				dir ('taco-scripts') {
-					sh """ source adminrc
-					kubectl get po --all-namespaces > pod_status.txt
-					openstack service list > os_list.txt
-					openstack network list >> os_list.txt
-					openstack server list >> os_list.txt
-					"""
+				sh """ source workspace/taco_pipe/taco-scripts/adminrc
+				kubectl get po --all-namespaces > pod_status.txt
+				openstack service list > os_list.txt
+				openstack network list >> os_list.txt
+				openstack server list >> os_list.txt
+				"""
 				}
 			}
 		}
