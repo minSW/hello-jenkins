@@ -27,17 +27,17 @@ pipeline {
 			    }
 			}
 		}
-		
-*/
+		*/
+
 		stage('Run the script 040-41') {
 			steps {
 			    dir('taco-scripts') {
-			    	sh "sudo ./040-deploy-openstack.sh"
-			    	sh "sudo ./041-install-armada.sh"
+			    	//sh "sudo ./040-deploy-openstack.sh"
+			    	sh "sudo ./041-deploy-mon.sh"
 			    }
 			}
 		}
-		/*
+		
 
 		stage('Run the script 050 _ create os resources') {
 			steps {
@@ -59,7 +59,7 @@ pipeline {
 				}
 			}
 		}
-		*/
+		
 
 	}
 
