@@ -1,5 +1,5 @@
 pipeline {
-	agent { node 'slave-1' }
+	agent { node 'slave-root' }
 
 	options {
 		timeout(time: 1000, unit: 'MINUTES' )
@@ -7,7 +7,7 @@ pipeline {
 	}
 
 	stages {
-	/*
+
 		stage('Init') {
 			steps {
 				sh """sudo -i
@@ -27,8 +27,8 @@ pipeline {
 			    }
 			}
 		}
-		*/
-
+		
+/*
 		stage('Run the script 040-41') {
 			steps {
 			    dir('taco-scripts') {
@@ -59,6 +59,7 @@ pipeline {
 			}
 		}
 	}
+*/
 	post {
 		success {
 			//notifyCompleted(true)
