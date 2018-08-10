@@ -58,8 +58,9 @@ pipeline {
 				}
 			}
 		}
-	}
 */
+	}
+
 	post {
 		success {
 			//notifyCompleted(true)
