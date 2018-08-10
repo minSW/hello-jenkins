@@ -56,7 +56,6 @@ pipeline {
 				openstack server list >> os_list.txt
 				"""
 				}
-			}
 		}
 		
 
