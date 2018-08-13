@@ -50,7 +50,7 @@ pipeline {
 		stage('Test os') {
 			steps {
 				dir('taco-scripts') {
-					sh """ source adminrc
+					sh """ . adminrc
 					kubectl get po --all-namespaces > pod_status.txt
 					openstack service list > os_list.txt
 					openstack network list >> os_list.txt
